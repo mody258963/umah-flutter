@@ -15,7 +15,7 @@ class AppRouter {
   EmailAuthCubit? emailAuthCubit;
 
   AppRouter() {
-    uplodingDataCubit = UplodingDataCubit();
+    uplodingDataCubit = UplodingDataCubit(MyRepo(NameWebServise()));
     getMethodCubit = GetMethodCubit(MyRepo(NameWebServise()));
     emailAuthCubit = EmailAuthCubit(MyRepo(NameWebServise()));
   }
@@ -38,8 +38,8 @@ class AppRouter {
 
       case posters:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider<EmailAuthCubit>.value(
-                  value: emailAuthCubit!,
+            builder: (_) => BlocProvider<UplodingDataCubit>.value(
+                  value: uplodingDataCubit!,
                   child: const HomeScreen(),
                 ));
     }
