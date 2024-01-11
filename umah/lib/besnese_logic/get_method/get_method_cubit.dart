@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umah/besnese_logic/get_method/get_method_state.dart';
-import 'package:umah/web_servese/model/web_serv.dart';
+import 'package:umah/web_servese/dio/web_serv.dart';
 import 'package:umah/web_servese/reproserty/myRepo.dart';
 
 import '../../web_servese/model/username.dart';
@@ -15,8 +15,7 @@ class GetMethodCubit extends Cubit<GetMethodState> {
   Future<FutureOr<void>> emitGetAllUSers() async {
     try {
       emit(LodingState());
-      List<User> posts = await myRepo.getAllUsers();
-      print('=======cubit=====${posts.first.image}');
+      List<User> posts = await myRepo.getAllUsers('all-user');
       emit(AllItemsState(posts: posts));
     } catch (e) {
       print('========cubits=======${e.toString()}');

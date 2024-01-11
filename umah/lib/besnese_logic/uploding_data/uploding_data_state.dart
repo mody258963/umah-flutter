@@ -1,3 +1,5 @@
+import 'dart:io';
+
 sealed class UplodingDataState {}
 
 final class UplodingDataInitial extends UplodingDataState {}
@@ -10,6 +12,10 @@ class ErrorOccurred extends UplodingDataState {
   ErrorOccurred({required this.errorMsg});
 }
 
-class PhonwNumberSumbited extends UplodingDataState {}
+class GetDataFromUi extends UplodingDataState {
+  final File data;
+
+  GetDataFromUi({required this.data});
+}
 
 class PhoneOTPVerified extends UplodingDataState {}
