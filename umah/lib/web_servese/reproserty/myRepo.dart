@@ -12,21 +12,23 @@ class MyRepo {
 
   MyRepo(this.nameWebService);
 
-
   Future<List<User>> getAllUsers(String end) async {
     final names = await nameWebService.get(end);
     final userList = names.map((names) => User.fromJson(names)).toList();
     return userList..shuffle();
   }
 
-  Future<List<User>> login(String end, Object data) async {
+  Future<String> login(String end, Object data) async {
     try {
       final result = await nameWebService.post(end, data);
 
       if (result.isNotEmpty) {
-        final userid = result.map((result) => User.fromJson(result)).toList();
-        return userid..shuffle();
-        
+        // final userid = result.map((result) => User.fromJson(result)).toList();
+        dynamic firstItem = result[0];
+        int userId = firstItem['user_id'];
+        String userIdAsString = userId.toString();
+        print('login $userIdAsString');
+        return userIdAsString;
       } else {
         throw Exception("Invalid response format: Empty response");
       }
@@ -36,14 +38,13 @@ class MyRepo {
     }
   }
 
-    Future<List<User>> audioUpload(String end, Object data) async {
+  Future<List<User>> audioUpload(String end, Object data) async {
     try {
       final result = await nameWebService.post(end, data);
 
       if (result.isNotEmpty) {
         final audio = result.map((audio) => User.fromJson(audio)).toList();
         return audio..shuffle();
-        
       } else {
         throw Exception("Invalid response format: Empty response");
       }

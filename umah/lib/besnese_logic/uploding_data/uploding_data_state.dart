@@ -13,7 +13,7 @@ class ErrorOccurred extends UplodingDataState {
 }
 
 class GetDataFromUi extends UplodingDataState {
-  final File data;
+  final File? data;
 
   GetDataFromUi({required this.data});
 }

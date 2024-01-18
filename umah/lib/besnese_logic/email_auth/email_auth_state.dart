@@ -8,7 +8,7 @@ class EmailAuthInitial extends EmailAuthState {}
 class LoginLoading extends EmailAuthState{}
 
 class LoginSuccess extends EmailAuthState {
-  final List userId;
+  final String userId;
 
   LoginSuccess({required this.userId});
 

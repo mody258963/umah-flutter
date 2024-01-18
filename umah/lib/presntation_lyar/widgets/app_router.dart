@@ -26,7 +26,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider<EmailAuthCubit>.value(
                   value: emailAuthCubit!,
-                  child: const LoginScreen(),
+                  child: const HomeScreen(),
                 ));
       //   case Optpage:
       //     final phoneNumber = settings.arguments;
@@ -36,13 +36,13 @@ class AppRouter {
       //               child: OPTverify(phoneNumber: phoneNumber),
       //             ));
 
-      case posters:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<UplodingDataCubit>.value(
-                  value: uplodingDataCubit!,
-                  child: const HomeScreen(),
-                ));
-    }
+      // case posters:
+      //   return MaterialPageRoute(
+      //       builder: (_) => BlocProvider<UplodingDataCubit>.value(
+      //             value: uplodingDataCubit!,
+      //             child: const LoginScreen(),
+      //           ));
+     }
     return null;
   }
 }

@@ -14,8 +14,9 @@ class EmailAuthCubit extends Cubit<EmailAuthState> {
     emit(LoginLoading());
 
     try {
-      List<dynamic> result = await myRepo
+      String result = await myRepo
           .login('user/login', {'email': email, 'password': password});
+      print('=====cubit====$result');
       emit(LoginSuccess(userId: result));
     } catch (e) {
       emit(Loginfails());

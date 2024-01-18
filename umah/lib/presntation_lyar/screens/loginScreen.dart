@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:umah/besnese_logic/uploding_data/uploding_data_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,32 +15,34 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController durationController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
+  File? _selectedAudio;
 
   Widget _Textarea() {
     return Column(
       children: [
-        Text('duration is here'),
+      
         TextField(
           controller: titleController,
-          decoration: InputDecoration(labelText: 'Password'),
+          decoration: InputDecoration(labelText: 'title'),
         ),
       ],
     );
   }
 
-  Future<Duration?> getAudioDuration(String filePath) async {
-  final FlutterSoundPlayer player = FlutterSoundPlayer();
-  final duration = await player.;
-  print('Audio duration: ${duration.inSeconds} seconds');
-  await player.closeAudio();
-  }
+  Future<File?> _pickAudio() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      allowMultiple: false,
+    );
 
-  Future<void> pickAndUploadAudio() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.audio);
-    if (result != null && result.files.isNotEmpty) {
-      String filePath = result.files.first.path!;
-      await uploadAudioFile(filePath);
+    if (result != null) {
+      _selectedAudio = File(result.files.single.path!);
+      print('Selected Audio: ${_selectedAudio!.path}');
+      return _selectedAudio;
+    } else {
+      // User canceled the file picker
+      print('No audio file selected');
+      return null;
     }
   }
 
@@ -51,7 +55,18 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [_Textarea()],
+        children: [
+          _Textarea(),
+          ElevatedButton(
+              onPressed: () {
+                _pickAudio();
+                context.read<UplodingDataCubit>().uploadAudio(_selectedAudio, titleController.text);
+              
+                    
+
+              },
+              child: Text('mohamed'))
+        ],
       ),
     ));
   }

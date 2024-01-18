@@ -23,14 +23,14 @@ class NameWebServise {
     }
   }
 
-   Future<List<dynamic>> post(String end, Object data) async {
+   Future<List<dynamic>> post(String end, Object data ) async {
     try {
       final response = await dio.post(
-        baseUrl + end,
+        baseUrl + end ,
         data: data
       );
 
-      print(response);
+      print('========$response');
     return [response.data];
     } catch (e) {
       print("======dio=======${e.toString()}");
