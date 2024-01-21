@@ -8,7 +8,7 @@ String? initialRoute;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initialRoute = posters;
+  initialRoute = Optpage;
 
   runApp(MyApp(
     appRouter: AppRouter(),

@@ -12,20 +12,19 @@ class UplodingDataCubit extends Cubit<UplodingDataState> {
 
   final List<String> UrlPhotos = [];
 
-  Future<void> uploadAudio(File? data, String title) async {
+  Future<void> uploadAudio(File? data, String title, String id) async {
     emit(Loading());
     try {
-    emit(GetDataFromUi(data: data));
+      print('===uspload=====$id');
+      emit(GetDataFromUi(data: data));
       FormData formData = FormData.fromMap({
         'file_path': await MultipartFile.fromFile(
           data!.path,
         ),
-        // Additional parameters, if any
         'title': title,
       });
       List<dynamic> getfile =
-          await myRepo.audioUpload('audios/store', formData);
-      
+          await myRepo.audioUpload('audios/store/$id', formData);
     } catch (e) {}
 
     Future<void> uploadImagesAndSaveUrls(List<File> images) async {

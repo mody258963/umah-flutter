@@ -1,5 +1,6 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:umah/web_servese/model/course.dart';
 
 import '../../web_servese/model/username.dart';
 
@@ -14,6 +15,14 @@ class AllItemsState extends GetMethodState {
  final List<User> posts;
 
   AllItemsState({required this.posts});
+
+
+}
+
+class CourseOfUserState extends GetMethodState {
+ final List<Course> posts;
+
+  CourseOfUserState({required this.posts});
 
 
 }

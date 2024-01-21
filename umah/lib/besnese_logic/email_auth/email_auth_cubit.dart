@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:umah/besnese_logic/get_method/get_method_cubit.dart';
 import 'package:umah/web_servese/reproserty/myRepo.dart';
 
 part 'email_auth_state.dart';

@@ -61,22 +61,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildloginAuth() {
     return BlocListener<EmailAuthCubit, EmailAuthState>(
-        listenWhen: (previous, current) {
-      return previous != current;
-    }, listener: (context, EmailAuthState state) {
-      if (state is LoginLoading) {
-        _Circelindecator(context);
-      }
-      if (state is Loginfails) {
-        AlertDialog(
-          title: Text('dont play with me'),
-        );
-      }
-      if (state is LoginSuccess) {
-        Navigator.maybePop(context);
-        Navigator.of(context, rootNavigator: true).pushNamed(logain);
-      }
-    },child: Container(),);
+      listenWhen: (previous, current) {
+        return previous != current;
+      },
+      listener: (context, EmailAuthState state) {
+        if (state is LoginLoading) {
+          _Circelindecator(context);
+        }
+        if (state is Loginfails) {
+          AlertDialog(
+            title: Text('dont play with me'),
+          );
+        }
+        if (state is LoginSuccess) {
+          Navigator.maybePop(context);
+          Navigator.of(context, rootNavigator: true).pushReplacementNamed(posters);
+        }
+      },
+      child: Container(),
+    );
   }
 
   Widget Textarea() {
@@ -93,8 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
-  
 
   Widget Alldatauser(List<User> allUsersList) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -120,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           children: [
             Textarea(),
-            _buildloginAuth(),
             ElevatedButton(
                 onPressed: () {
                   // BlocProvider.of<GetMethodCubit>(context).emitGetAllUSers();
@@ -129,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         passwordController.text,
                       );
                 },
-                child: Text("mohamed"))
+                child: Text("mohamed")),
+            _buildloginAuth(),
           ],
         ),
       ),

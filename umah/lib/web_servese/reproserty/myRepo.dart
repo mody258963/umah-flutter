@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
 import 'package:umah/costanse/strings.dart';
+import 'package:umah/web_servese/model/course.dart';
 
 import 'package:umah/web_servese/model/username.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,12 @@ class MyRepo {
     final names = await nameWebService.get(end);
     final userList = names.map((names) => User.fromJson(names)).toList();
     return userList..shuffle();
+  }
+
+  Future<List<Course>> getAllCourseOfUser(String end) async {
+    final names = await nameWebService.get(end);
+    final courseList = names.map((names) => Course.fromJson(names)).toList();
+    return courseList..shuffle();
   }
 
   Future<String> login(String end, Object data) async {
